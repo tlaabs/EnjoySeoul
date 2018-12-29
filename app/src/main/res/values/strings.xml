@@ -1,3 +1,19 @@
 <resources>
-    <string name="app_name">EnjoySeoul</string>
+    <string name="app_name">Enjoy Seoul</string>
+    <string name="app_sub_name">서울시 문화행사 정보통</string>
+
+    <!--DB-->
+    <string name="db_name">enjoy.db</string>
+    <string name="event_table">events</string>
+    <string name="like_table">like</string>
+    <string name="data_src_url">http://115.84.165.224/bigfile/iot/sheet/csv/download.do?infId=OA-135</string>
+    <string name="data_name">events_data.csv</string>
+
+    <!--error-->
+    <string name="data_download_err">[데이터 다운로드 오류] 인터넷 연결 확인 후 다시 시도해주세요.</string>
+    <string name="data_record_err">[DB 레코딩 오류] 다시 시도해주세요.</string>
+
+    <!--font-->
+    <string name="font_path">fonts/dancing_bold.ttf</string>
+    <string name="title_activity_main">MainActivity</string>
 </resources>
