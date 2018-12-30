@@ -10,9 +10,12 @@ import android.support.v7.app.AppCompatActivity;
 
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import site.devsim.enjoyseoul.Adapter.MainPagerAdapter;
+import site.devsim.enjoyseoul.DB.DBManager;
 import site.devsim.enjoyseoul.R;
 
 public class MainActivity extends AppCompatActivity {
@@ -27,12 +30,15 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.tabs)
     TabLayout mTab;
 
+    DBManager dbManager = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         context = this;
         ButterKnife.bind(this);
+        dbManager = new DBManager(this);
         initView();
     }
 
@@ -42,11 +48,11 @@ public class MainActivity extends AppCompatActivity {
         txtAppTitle.setTypeface(typeface);
 
         //ViewPager + TabLayout
-        MainPagerAdapter mTestPagerAdapter = new MainPagerAdapter(getSupportFragmentManager());
+        ArrayList<String> genreList = dbManager.getGenreNames();
+        MainPagerAdapter mTestPagerAdapter = new MainPagerAdapter(getSupportFragmentManager(),genreList);
         mViewPager.setAdapter(mTestPagerAdapter);
 
         mTab.setupWithViewPager(mViewPager);
         mTab.setTabMode(TabLayout.MODE_SCROLLABLE);
     }
-
 }
