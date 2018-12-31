@@ -8,6 +8,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 
+import android.util.Log;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -16,6 +17,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import site.devsim.enjoyseoul.Adapter.MainPagerAdapter;
 import site.devsim.enjoyseoul.DB.DBManager;
+import site.devsim.enjoyseoul.DB.POJO.EventItem;
 import site.devsim.enjoyseoul.R;
 
 public class MainActivity extends AppCompatActivity {
@@ -40,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         dbManager = new DBManager(this);
         initView();
+        dbManager.close();
     }
 
     private void initView(){
@@ -48,8 +51,9 @@ public class MainActivity extends AppCompatActivity {
         txtAppTitle.setTypeface(typeface);
 
         //ViewPager + TabLayout
-        ArrayList<String> genreList = dbManager.getGenreNames();
-        MainPagerAdapter mTestPagerAdapter = new MainPagerAdapter(getSupportFragmentManager(),genreList);
+        ArrayList<String> genreList = dbManager.getGenreNames(); //장르 리스트
+        ArrayList<EventItem> eventList = dbManager.getAllEvents(); //모든 행사 가져오기
+        MainPagerAdapter mTestPagerAdapter = new MainPagerAdapter(getSupportFragmentManager(),genreList,eventList);
         mViewPager.setAdapter(mTestPagerAdapter);
 
         mTab.setupWithViewPager(mViewPager);
