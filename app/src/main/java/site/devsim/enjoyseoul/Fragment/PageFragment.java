@@ -24,7 +24,6 @@ public class PageFragment extends Fragment {
     private String genre;
     private ArrayList<EventItem> eventList;
 
-    private TextView logTxt;
     private RecyclerView listView;
 
     @Override
@@ -53,6 +52,9 @@ public class PageFragment extends Fragment {
     }
 
     private ArrayList<EventItem> findEventByGenre(ArrayList<EventItem> src, String genre){
+        if(genre.equals("전체")){
+            return src;
+        }
         ArrayList<EventItem> res = new ArrayList<EventItem>();
         for(EventItem i : src){
             if(i.getGenre().equals(genre)){

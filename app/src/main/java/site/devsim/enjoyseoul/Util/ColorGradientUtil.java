@@ -20,6 +20,7 @@ public class ColorGradientUtil {
 
         DBManager db = new DBManager(context);
         ArrayList<String> genreList = db.getGenreNames();
+        genreList.add(0,"전체");
         db.close();
 
         HashMap<String, Integer> colorMap = new HashMap<String,Integer>();

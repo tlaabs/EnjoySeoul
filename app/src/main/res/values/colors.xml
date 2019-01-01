@@ -5,6 +5,7 @@
     <color name="colorAccent">#D81B60</color>
 
     <color name="colorMainDark">#394657</color>
+    <color name="prettyPink">#f77f79</color>
 
     <!-- TabLayout -->
     <color name="colorTabText">#939393</color>
@@ -13,6 +14,7 @@
 
     <color name="colorListViewBG">#d3d3d3</color>
     <color name="colorGray">#d3d3d3</color>
+    <color name="colorDarkGray">#b4b8bb</color>
 
     <color name="feeFree">#008ece</color>
     <color name="feeNotFree">#ae1831</color>
