@@ -34,6 +34,7 @@ import site.devsim.enjoyseoul.DB.DBManager;
 import site.devsim.enjoyseoul.R;
 import site.devsim.enjoyseoul.Util.ColorGradientUtil;
 import site.devsim.enjoyseoul.Util.SearchCondition;
+import site.devsim.enjoyseoul.Util.SearchQueryBuilder;
 
 public class SearchActivity extends AppCompatActivity {
 
@@ -99,10 +100,10 @@ public class SearchActivity extends AppCompatActivity {
                 condition.setSearchFee("요금무관");
                 break;
             case R.id.check_fee_free:
-                condition.setSearchFee("무료");
+                condition.setSearchFee("1");
                 break;
             case R.id.check_fee_not_free:
-                condition.setSearchFee("유료");
+                condition.setSearchFee("0");
                 break;
         }
     }
@@ -152,6 +153,9 @@ public class SearchActivity extends AppCompatActivity {
     @OnClick(R.id.btn_search)
     void btnSearchClicked() {
         condition.setSearchKeyword(inputSearch.getText().toString());
+
+        Toast.makeText(getApplicationContext(),SearchQueryBuilder.getSearchQuery(getResources().getString(R.string.event_table),condition),Toast.LENGTH_LONG).show();
+
 
     }
 
