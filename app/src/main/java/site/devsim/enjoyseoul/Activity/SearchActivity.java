@@ -56,7 +56,9 @@ public class SearchActivity extends AppCompatActivity {
     @BindView(R.id.check_fee_free)
     Button checkFeeFree;
 
-    SearchCondition condition;
+    private SearchCondition condition;
+
+    private boolean isReSearch = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,24 +67,45 @@ public class SearchActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         condition = new SearchCondition();
         initView();
+        initIfReSearch();
+    }
+
+    private void initIfReSearch(){
+        Intent i = getIntent();
+        SearchCondition tmpCondition = (SearchCondition)i.getSerializableExtra("condition");
+        if(tmpCondition == null) return;
+        else{
+            condition = tmpCondition;
+            inputSearch.setText(condition.getSearchKeyword());
+
+            genreListBox.removeAllViews();
+            genreListBox.addView(createGenreListItem(condition.getSearchGenre()));
+
+            String fee = condition.getSearchFee();
+            if(fee.equals("요금무관")) feeItemOffWithout(checkFeeAll);
+            else if(fee.equals("1")) feeItemOffWithout(checkFeeFree);
+            else if(fee.equals("0")) feeItemOffWithout(checkFeeNotFree);
+        }
+        isReSearch = true;
     }
 
     private void initView() {
         checkFeeAll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                feeItemOffWithout((Button)v);
+                feeItemOffWithout((Button) v);
             }
         });
         checkFeeFree.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                feeItemOffWithout((Button)v);
+                feeItemOffWithout((Button) v);
             }
         });
         checkFeeNotFree.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) { feeItemOffWithout((Button)v);
+            public void onClick(View v) {
+                feeItemOffWithout((Button) v);
             }
         });
         genreListBox.addView(createGenreListItem("전체"));
@@ -95,7 +118,7 @@ public class SearchActivity extends AppCompatActivity {
         checkFeeNotFree.setBackground(getResources().getDrawable(R.drawable.gray_rectangle));
 
         item.setBackground(getResources().getDrawable(R.drawable.pink_stroke_rectangle));
-        switch(item.getId()){
+        switch (item.getId()) {
             case R.id.check_fee_all:
                 condition.setSearchFee("요금무관");
                 break;
@@ -111,8 +134,8 @@ public class SearchActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(resultCode == RESULT_OK){
-            switch(requestCode){
+        if (resultCode == RESULT_OK) {
+            switch (requestCode) {
                 case PICK_GENRE_REQUEST:
                     condition.setSearchGenre(data.getStringExtra("pick"));
 
@@ -144,7 +167,7 @@ public class SearchActivity extends AppCompatActivity {
         item.setTypeface(null, Typeface.BOLD);
         item.setText(genre);
 
-        ColorGradientUtil.applyGenreColorGradient(this,genre,item);
+        ColorGradientUtil.applyGenreColorGradient(this, genre, item);
 
         return item;
     }
@@ -154,20 +177,28 @@ public class SearchActivity extends AppCompatActivity {
     void btnSearchClicked() {
         condition.setSearchKeyword(inputSearch.getText().toString());
 
-        Toast.makeText(getApplicationContext(),SearchQueryBuilder.getSearchQuery(getResources().getString(R.string.event_table),condition),Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(), SearchQueryBuilder.getSearchQuery(getResources().getString(R.string.event_table), condition), Toast.LENGTH_LONG).show();
 
+        Intent i = new Intent(this,SearchResultActivity.class);
+        i.putExtra("condition", condition);
+        if(isReSearch == false){
+            startActivity(i);
+        }else if(isReSearch){
+            setResult(RESULT_OK, i);
+        }
+        finish();
 
     }
 
     @OnClick(R.id.btn_reset)
-    void btnResetClicked(){
+    void btnResetClicked() {
         inputSearch.setText("");
 
     }
 
     @OnClick(R.id.btn_pick_genre)
-    void btnPickGenreClicked(){
-        Intent i = new Intent(this,GenrePickDialog.class);
-        startActivityForResult(i,PICK_GENRE_REQUEST);
+    void btnPickGenreClicked() {
+        Intent i = new Intent(this, GenrePickDialog.class);
+        startActivityForResult(i, PICK_GENRE_REQUEST);
     }
 }

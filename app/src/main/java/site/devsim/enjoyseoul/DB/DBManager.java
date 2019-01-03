@@ -3,6 +3,7 @@ package site.devsim.enjoyseoul.DB;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.EventLog;
 
 import java.util.ArrayList;
 
@@ -17,22 +18,22 @@ public class DBManager {
 
     SQLiteDatabase db;
 
-    public DBManager(Context context){
+    public DBManager(Context context) {
         this.context = context;
         EVENT_TABLE = context.getString(R.string.event_table);
-        db = context.openOrCreateDatabase(context.getString(R.string.db_name),context.MODE_PRIVATE, null);
+        db = context.openOrCreateDatabase(context.getString(R.string.db_name), context.MODE_PRIVATE, null);
     }
 
-    public ArrayList<String> getGenreNames(){
+    public ArrayList<String> getGenreNames() {
         ArrayList<String> genreList = new ArrayList<String>();
 
         String sql = "SELECT GENRE FROM " + EVENT_TABLE + " GROUP BY GENRE";
-        Cursor cursor = db.rawQuery(sql,null);
+        Cursor cursor = db.rawQuery(sql, null);
         int count = cursor.getCount();
 
-        if(cursor != null && count != 0){
+        if (cursor != null && count != 0) {
             cursor.moveToFirst();
-            for(int i = 0 ; i < count; i++){
+            for (int i = 0; i < count; i++) {
                 String genre = cursor.getString(0).trim();
                 genreList.add(genre);
                 cursor.moveToNext();
@@ -42,15 +43,30 @@ public class DBManager {
         return genreList;
 
     }
-    public ArrayList<EventItem> getAllEvents(){
-        ArrayList<EventItem> eventList = new ArrayList<EventItem>();
+
+    public ArrayList<EventItem> getAllEvents() {
+        ArrayList<EventItem> eventList;
         String sql = "SELECT * FROM " + EVENT_TABLE;
-        Cursor cursor = db.rawQuery(sql,null);
+        Cursor cursor = db.rawQuery(sql, null);
+        eventList = unpackCursor(cursor);
+        return eventList;
+    }
+
+    public ArrayList<EventItem> runSql(String sql){
+        ArrayList<EventItem> eventList;
+        Cursor cursor = db.rawQuery(sql, null);
+        eventList = unpackCursor(cursor);
+        return eventList;
+    }
+
+    private ArrayList<EventItem> unpackCursor(Cursor cursor) {
+        ArrayList<EventItem> eventList = new ArrayList<EventItem>();
+
         int count = cursor.getCount();
 
-        if(cursor != null && count != 0){
+        if (cursor != null && count != 0) {
             cursor.moveToFirst();
-            for(int i = 0; i < count; i++){
+            for (int i = 0; i < count; i++) {
                 EventItem item = new EventItem();
                 item.setId(cursor.getString(0));
                 item.setGenre(cursor.getString(1));
@@ -73,7 +89,8 @@ public class DBManager {
         }
         return eventList;
     }
-    public void close(){
+
+    public void close() {
         db.close();
     }
 }

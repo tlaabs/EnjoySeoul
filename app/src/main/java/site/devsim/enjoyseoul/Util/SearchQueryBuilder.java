@@ -5,7 +5,7 @@ public class SearchQueryBuilder {
         boolean leastAndFlag = false;
 
         StringBuilder sql = new StringBuilder();
-        sql.append("SELECT FROM " + table);
+        sql.append("SELECT * FROM " + table);
 
         if(isDefaultCondition(condition)) return sql.toString(); //Default값이면 전체 검색
         else{

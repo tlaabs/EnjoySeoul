@@ -26,8 +26,11 @@
         <activity
             android:name=".Activity.SearchActivity"
             android:theme="@style/AppTheme" />
-        <activity android:name=".Activity.Dialog.GenrePickDialog"
-            android:theme="@style/DialogTheme"
+        <activity
+            android:name=".Activity.Dialog.GenrePickDialog"
+            android:theme="@style/DialogTheme" />
+        <activity android:name=".Activity.SearchResultActivity"
+            android:theme="@style/AppTheme"
             ></activity>
     </application>
 

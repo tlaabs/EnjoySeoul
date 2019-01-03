@@ -1,6 +1,8 @@
 package site.devsim.enjoyseoul.Util;
 
-public class SearchCondition {
+import java.io.Serializable;
+
+public class SearchCondition implements Serializable {
     private String searchKeyword = "";
     private String searchGenre = "전체";
     private String searchFee = "요금무관";
