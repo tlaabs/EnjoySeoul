@@ -31,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
 
     @BindView(R.id.menu_search)
     ImageView menuSearch;
+    @BindView(R.id.menu_like)
+    ImageView menuLike;
 
     @BindView(R.id.txt_app_title)
     TextView txtAppTitle;
@@ -70,6 +72,12 @@ public class MainActivity extends AppCompatActivity {
     @OnClick(R.id.menu_search)
     void menuClicked(){
         Intent i = new Intent(this,SearchActivity.class);
+        startActivity(i);
+    }
+
+    @OnClick(R.id.menu_like)
+    void likeClicked(){
+        Intent i = new Intent(this,LikeActivity.class);
         startActivity(i);
     }
 }

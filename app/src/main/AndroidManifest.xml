@@ -3,7 +3,6 @@
     package="site.devsim.enjoyseoul">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -29,9 +28,15 @@
         <activity
             android:name=".Activity.Dialog.GenrePickDialog"
             android:theme="@style/DialogTheme" />
-        <activity android:name=".Activity.SearchResultActivity"
+        <activity
+            android:name=".Activity.SearchResultActivity"
+            android:theme="@style/AppTheme" />
+        <activity android:name=".Activity.DetailEventActivity"
             android:theme="@style/AppTheme"
-            ></activity>
+            />
+        <activity android:name=".Activity.LikeActivity"
+            android:theme="@style/AppTheme"
+            />
     </application>
 
 </manifest>

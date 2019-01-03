@@ -1,6 +1,7 @@
 package site.devsim.enjoyseoul.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -13,6 +14,7 @@ import com.bumptech.glide.Glide;
 import java.util.ArrayList;
 import java.util.List;
 
+import site.devsim.enjoyseoul.Activity.DetailEventActivity;
 import site.devsim.enjoyseoul.DB.POJO.EventItem;
 import site.devsim.enjoyseoul.R;
 import site.devsim.enjoyseoul.Util.ColorGradientUtil;
@@ -37,7 +39,7 @@ public class ListViewAdapter extends RecyclerView.Adapter<ListViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ListViewHolder holder, int position) {
-        EventItem item = items.get(position);
+        final EventItem item = items.get(position);
         Glide
                 .with(context)
                 .load(item.getMainImg())
@@ -55,6 +57,14 @@ public class ListViewAdapter extends RecyclerView.Adapter<ListViewHolder> {
 
         holder.txtTitle.setText(item.getTitle());
         holder.txtPeriod.setText(item.getStartDate() + "~" + item.getEndDate());
+        holder.box.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(context, DetailEventActivity.class);
+                i.putExtra("event", item);
+                context.startActivity(i);
+            }
+        });
     }
 
     @Override

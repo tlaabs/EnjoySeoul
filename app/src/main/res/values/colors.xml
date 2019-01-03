@@ -6,6 +6,9 @@
 
     <color name="colorMainDark">#394657</color>
     <color name="prettyPink">#f77f79</color>
+    <color name="detailText">#647fac</color>
+
+    <color name="isfavor">#f77f79</color>
 
     <!-- TabLayout -->
     <color name="colorTabText">#939393</color>

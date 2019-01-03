@@ -4,6 +4,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.EventLog;
+import android.util.Log;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -59,6 +61,27 @@ public class DBManager {
         return eventList;
     }
 
+    public ArrayList<EventItem> getLikes(){
+        String sql = "SELECT ID FROM " + context.getString(R.string.like_table);
+
+        Cursor cursor = db.rawQuery(sql, null);
+        int count = cursor.getCount();
+        ArrayList<String> eventList = new ArrayList<String>();
+        sql = "SELECT * FROM " + context.getString(R.string.event_table) + " WHERE ";
+        if (cursor != null && count != 0) {
+            cursor.moveToFirst();
+            for (int i = 0; i < count; i++) {
+                eventList.add(cursor.getString(0));
+                sql += "ID=" + cursor.getString(0);
+                if (i < count - 1)
+                    sql += " OR ";
+                cursor.moveToNext();
+            }
+        }
+
+        return runSql(sql);
+    }
+
     private ArrayList<EventItem> unpackCursor(Cursor cursor) {
         ArrayList<EventItem> eventList = new ArrayList<EventItem>();
 
@@ -89,7 +112,23 @@ public class DBManager {
         }
         return eventList;
     }
-
+    public boolean isLikeExist(String id){
+        String sql = "SELECT * FROM " + context.getString(R.string.like_table) + " WHERE ID = " + id;
+        Cursor cursor = db.rawQuery(sql, null);
+        if (cursor.getCount() == 0) {
+            return false;
+        }
+        return true;
+    }
+    public void addToggleLike(String id){
+        String sql;
+        if (!isLikeExist(id)) {
+            sql = "INSERT INTO " + context.getString(R.string.like_table) + " values(" + id + ")";
+        } else {
+            sql = "DELETE FROM " + context.getString(R.string.like_table) + " WHERE ID = " + id;
+        }
+        db.execSQL(sql);
+    }
     public void close() {
         db.close();
     }

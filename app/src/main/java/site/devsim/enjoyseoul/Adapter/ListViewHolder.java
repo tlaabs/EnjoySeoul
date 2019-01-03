@@ -9,6 +9,7 @@ import android.widget.TextView;
 import site.devsim.enjoyseoul.R;
 
 public class ListViewHolder extends RecyclerView.ViewHolder {
+    View box;
     ImageView imgItem;
     TextView alertGenre;
     TextView alertFee;
@@ -17,6 +18,7 @@ public class ListViewHolder extends RecyclerView.ViewHolder {
 
     public ListViewHolder(View itemView){
         super(itemView);
+        box = itemView;
         imgItem = itemView.findViewById(R.id.img_item);
         alertGenre = itemView.findViewById(R.id.alert_genre);
         alertFee= itemView.findViewById(R.id.alert_fee);
