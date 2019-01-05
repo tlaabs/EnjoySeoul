@@ -92,4 +92,9 @@ public class SearchResultActivity extends AppCompatActivity {
         startActivityForResult(i,RE_SEARCH_REQUEST);
     }
 
+    @OnClick(R.id.btn_back)
+    void btnBackClicked(){
+        finish();
+    }
+
 }

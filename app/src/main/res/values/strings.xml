@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Enjoy Seoul</string>
     <string name="app_sub_name">서울시 문화행사 정보통</string>
+    <string name="app_name_kor">엔조이 서울</string>
 
     <!--DB-->
     <string name="db_name">enjoy.db</string>

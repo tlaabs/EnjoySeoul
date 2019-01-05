@@ -48,4 +48,9 @@ public class ColorGradientUtil {
             gradient.setColor(color);
         }
     }
+
+    public static void applyViewColorGradient(Context context, View view,int color){
+        GradientDrawable gradient = (GradientDrawable) view.getBackground();
+        gradient.setColor(context.getResources().getColor(color));
+    }
 }

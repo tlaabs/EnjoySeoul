@@ -56,6 +56,11 @@ public class SearchActivity extends AppCompatActivity {
     @BindView(R.id.check_fee_free)
     Button checkFeeFree;
 
+    @BindView(R.id.btn_reset)
+    Button btnReset;
+    @BindView(R.id.btn_search)
+    Button btnSearch;
+
     private SearchCondition condition;
 
     private boolean isReSearch = false;
@@ -90,6 +95,9 @@ public class SearchActivity extends AppCompatActivity {
     }
 
     private void initView() {
+        ColorGradientUtil.applyViewColorGradient(this,btnReset, R.color.colorMainDark);
+        ColorGradientUtil.applyViewColorGradient(this,btnSearch, R.color.prettyPink);
+
         checkFeeAll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -177,7 +185,7 @@ public class SearchActivity extends AppCompatActivity {
     void btnSearchClicked() {
         condition.setSearchKeyword(inputSearch.getText().toString());
 
-        Toast.makeText(getApplicationContext(), SearchQueryBuilder.getSearchQuery(getResources().getString(R.string.event_table), condition), Toast.LENGTH_LONG).show();
+        //Toast.makeText(getApplicationContext(), SearchQueryBuilder.getSearchQuery(getResources().getString(R.string.event_table), condition), Toast.LENGTH_LONG).show();
 
         Intent i = new Intent(this,SearchResultActivity.class);
         i.putExtra("condition", condition);
@@ -190,15 +198,23 @@ public class SearchActivity extends AppCompatActivity {
 
     }
 
-    @OnClick(R.id.btn_reset)
-    void btnResetClicked() {
-        inputSearch.setText("");
-
-    }
-
     @OnClick(R.id.btn_pick_genre)
     void btnPickGenreClicked() {
         Intent i = new Intent(this, GenrePickDialog.class);
         startActivityForResult(i, PICK_GENRE_REQUEST);
+    }
+
+    @OnClick(R.id.btn_back)
+    void btnBackClicked(){
+        finish();
+    }
+
+    @OnClick(R.id.btn_reset)
+    void btnResetClicked(){
+        condition = new SearchCondition();
+        inputSearch.setText("");
+        genreListBox.removeAllViews();
+        genreListBox.addView(createGenreListItem("전체"));
+        feeItemOffWithout(checkFeeAll);
     }
 }

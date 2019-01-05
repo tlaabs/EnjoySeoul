@@ -4,11 +4,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.ImageView;
 
 import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import site.devsim.enjoyseoul.Adapter.ListViewAdapter;
 import site.devsim.enjoyseoul.DB.DBManager;
 import site.devsim.enjoyseoul.DB.POJO.EventItem;
@@ -17,6 +19,8 @@ import site.devsim.enjoyseoul.Util.SearchQueryBuilder;
 
 public class LikeActivity extends AppCompatActivity {
 
+    @BindView(R.id.btn_back)
+    ImageView btnBack;
     @BindView(R.id.listView)
     RecyclerView listView;
 
@@ -50,5 +54,10 @@ public class LikeActivity extends AppCompatActivity {
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(this);
         listView.setLayoutManager(mLayoutManager);
         listView.setAdapter(mAdapter);
+    }
+
+    @OnClick(R.id.btn_back)
+    void btnBackClicked(){
+        finish();
     }
 }

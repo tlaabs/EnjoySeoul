@@ -63,10 +63,12 @@ public class DBManager {
 
     public ArrayList<EventItem> getLikes(){
         String sql = "SELECT ID FROM " + context.getString(R.string.like_table);
+        ArrayList<String> eventList = new ArrayList<String>();
 
         Cursor cursor = db.rawQuery(sql, null);
         int count = cursor.getCount();
-        ArrayList<String> eventList = new ArrayList<String>();
+        if(count < 1) return new ArrayList<EventItem>();
+
         sql = "SELECT * FROM " + context.getString(R.string.event_table) + " WHERE ";
         if (cursor != null && count != 0) {
             cursor.moveToFirst();
