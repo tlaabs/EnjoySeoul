@@ -11,9 +11,6 @@ Feature<br>
 
 1. Multiple Criteria Search
 
-Multiple conditions can be searched for names, genres, periods, regions, and fare items. 
-Multiple choices are available for all genres and all regions.
-
 2. Check the location of the venue in detail
 
 You can learn more about the location of the event through Google Maps.
