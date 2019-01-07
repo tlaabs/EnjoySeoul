@@ -34,3 +34,6 @@ Provide event information within 3 days of the deadline.
 <h3>8. Sharing event information</h3>
 
 You can share information about events through KakaoTalk.
+
+<h3>Link</h3>
+https://mplatform.seoul.go.kr/w/contest/award/2017/nominee/selectNominee.do
