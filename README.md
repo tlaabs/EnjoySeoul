@@ -7,32 +7,32 @@
 <h2>Service Diagram</h2><br>
 <img src="https://user-images.githubusercontent.com/8165219/50751952-670c6680-128f-11e9-986d-25cdc0a48708.png" width="80%"></img>
 
-Feature<br>
+<h2>Feature</h2><br>
 
-1. Multiple Criteria Search
+<h3>1. Multiple Criteria Search</h3>
 
-2. Check the location of the venue in detail
+<h3>2. Check the location of the venue in detail</h3>
 
 You can learn more about the location of the event through Google Maps.
 
-3. Providing Information on Culture Events of the Month
+<h3>3. Providing Information on Culture Events of the Month</h3>
 
 It provides information on events that can be enjoyed only this month.
 
-4. Providing information on new events
+<h3>4. Providing information on new events</h3>
 
 It provides information on new events that have been open for less than three days.
 
-5. Provide closing event information
+<h3>5. Provide closing event information</h3>
 
 Provide event information within 3 days of the deadline.
 
-6. Creating assessments and reviews
+<h3>6. Creating assessments and reviews</h3>
 
-7. Providing information on popular events
+<h3>7. Providing information on popular events</h3>
 
 The event with a lot of reviews is listed from the top to the top 10.
 
-8. Sharing event information
+<h3>8. Sharing event information</h3>
 
 You can share information about events through KakaoTalk.
