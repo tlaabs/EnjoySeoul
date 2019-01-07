@@ -31,8 +31,6 @@ Provide event information within 3 days of the deadline.
 
 <h3>7. Providing information on popular events</h3>
 
-The event with a lot of reviews is listed from the top to the top 10.
-
 <h3>8. Sharing event information</h3>
 
 You can share information about events through KakaoTalk.
