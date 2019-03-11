@@ -26,7 +26,6 @@ public class SearchQueryBuilder {
         }
 
         return sql.toString();
-
     }
 
     private static boolean isDefaultCondition(SearchCondition condition){

@@ -34,9 +34,8 @@ public class GenrePickDialog extends AppCompatActivity {
     }
 
     private void createListItems() {
-        DBManager dbManager = new DBManager(this);
+        DBManager dbManager = DBManager.getInstance(this);
         final ArrayList<String> genreList = dbManager.getGenreNames();
-        dbManager.close();
         genreList.add(0, "전체");
 
         int genreCount = genreList.size();

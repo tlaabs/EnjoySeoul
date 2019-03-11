@@ -49,9 +49,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         context = this;
         ButterKnife.bind(this);
-        dbManager = new DBManager(this);
+        dbManager = DBManager.getInstance(this);
         initView();
-        dbManager.close();
     }
     private void initView(){
         //앱 타이틀 폰트 적용
@@ -79,5 +78,11 @@ public class MainActivity extends AppCompatActivity {
     void likeClicked(){
         Intent i = new Intent(this,LikeActivity.class);
         startActivity(i);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        dbManager.close();
     }
 }

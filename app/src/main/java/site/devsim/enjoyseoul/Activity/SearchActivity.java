@@ -184,9 +184,6 @@ public class SearchActivity extends AppCompatActivity {
     @OnClick(R.id.btn_search)
     void btnSearchClicked() {
         condition.setSearchKeyword(inputSearch.getText().toString());
-
-        //Toast.makeText(getApplicationContext(), SearchQueryBuilder.getSearchQuery(getResources().getString(R.string.event_table), condition), Toast.LENGTH_LONG).show();
-
         Intent i = new Intent(this,SearchResultActivity.class);
         i.putExtra("condition", condition);
         if(isReSearch == false){

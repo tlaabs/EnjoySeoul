@@ -44,9 +44,8 @@ public class LikeActivity extends AppCompatActivity {
     }
 
     private void initListView(){
-        DBManager dbManager = new DBManager(this);
+        DBManager dbManager = DBManager.getInstance(this);
         eventList = dbManager.getLikes();
-        dbManager.close();
     }
 
     private void initView(){

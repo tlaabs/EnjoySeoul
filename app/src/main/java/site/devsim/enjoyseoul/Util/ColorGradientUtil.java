@@ -18,10 +18,9 @@ public class ColorGradientUtil {
         GradientDrawable gradient;
         String[] colors = context.getResources().getStringArray(R.array.genre_colors);
 
-        DBManager db = new DBManager(context);
+        DBManager db = DBManager.getInstance(context);
         ArrayList<String> genreList = db.getGenreNames();
         genreList.add(0,"전체");
-        db.close();
 
         HashMap<String, Integer> colorMap = new HashMap<String,Integer>();
         int idx = 0;

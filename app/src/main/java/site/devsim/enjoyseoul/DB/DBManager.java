@@ -1,11 +1,11 @@
 package site.devsim.enjoyseoul.DB;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.EventLog;
+import android.database.sqlite.SQLiteException;
 import android.util.Log;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -14,22 +14,36 @@ import site.devsim.enjoyseoul.R;
 import site.devsim.enjoyseoul.Util.TextCleanerUtil;
 
 public class DBManager {
-    private static final String TAG = "DBManager";
-    Context context;
-    private String EVENT_TABLE = null;
+    private static DBManager dbManager;
+    private DatabaseHelper helper;
+    private SQLiteDatabase db;
+    private Context context;
 
-    SQLiteDatabase db;
-
-    public DBManager(Context context) {
+    private DBManager(Context context){
         this.context = context;
-        EVENT_TABLE = context.getString(R.string.event_table);
-        db = context.openOrCreateDatabase(context.getString(R.string.db_name), context.MODE_PRIVATE, null);
+        helper = new DatabaseHelper(context);
+        try{
+            db = helper.getWritableDatabase();
+        }catch(SQLiteException e){
+            db = helper.getReadableDatabase();
+        }
+    }
+
+    public static DBManager getInstance(Context context){
+        if(dbManager == null){
+            dbManager = new DBManager(context);
+        }
+        return dbManager;
+    }
+
+    public void clearEventTable(){
+        db.execSQL("DELETE FROM " + context.getString(R.string.event_table) + ";");
     }
 
     public ArrayList<String> getGenreNames() {
         ArrayList<String> genreList = new ArrayList<String>();
 
-        String sql = "SELECT GENRE FROM " + EVENT_TABLE + " GROUP BY GENRE";
+        String sql = "SELECT GENRE FROM " +  context.getString(R.string.event_table) + " GROUP BY GENRE";
         Cursor cursor = db.rawQuery(sql, null);
         int count = cursor.getCount();
 
@@ -48,7 +62,7 @@ public class DBManager {
 
     public ArrayList<EventItem> getAllEvents() {
         ArrayList<EventItem> eventList;
-        String sql = "SELECT * FROM " + EVENT_TABLE;
+        String sql = "SELECT * FROM " +  context.getString(R.string.event_table);
         Cursor cursor = db.rawQuery(sql, null);
         eventList = unpackCursor(cursor);
         return eventList;
@@ -62,14 +76,14 @@ public class DBManager {
     }
 
     public ArrayList<EventItem> getLikes(){
-        String sql = "SELECT ID FROM " + context.getString(R.string.like_table);
+        String sql = "SELECT ID FROM " +  context.getString(R.string.like_table);
         ArrayList<String> eventList = new ArrayList<String>();
 
         Cursor cursor = db.rawQuery(sql, null);
         int count = cursor.getCount();
         if(count < 1) return new ArrayList<EventItem>();
 
-        sql = "SELECT * FROM " + context.getString(R.string.event_table) + " WHERE ";
+        sql = "SELECT * FROM " +  context.getString(R.string.event_table) + " WHERE ";
         if (cursor != null && count != 0) {
             cursor.moveToFirst();
             for (int i = 0; i < count; i++) {
@@ -80,7 +94,7 @@ public class DBManager {
                 cursor.moveToNext();
             }
         }
-
+        Log.d("adsf","zzz : " + sql);
         return runSql(sql);
     }
 
@@ -88,7 +102,7 @@ public class DBManager {
         ArrayList<EventItem> eventList = new ArrayList<EventItem>();
 
         int count = cursor.getCount();
-
+        Log.d("cozz","kp : " + count);
         if (cursor != null && count != 0) {
             cursor.moveToFirst();
             for (int i = 0; i < count; i++) {
@@ -115,7 +129,7 @@ public class DBManager {
         return eventList;
     }
     public boolean isLikeExist(String id){
-        String sql = "SELECT * FROM " + context.getString(R.string.like_table) + " WHERE ID = " + id;
+        String sql = "SELECT * FROM " +  context.getString(R.string.like_table) + " WHERE ID = " + id;
         Cursor cursor = db.rawQuery(sql, null);
         if (cursor.getCount() == 0) {
             return false;
@@ -125,11 +139,23 @@ public class DBManager {
     public void addToggleLike(String id){
         String sql;
         if (!isLikeExist(id)) {
-            sql = "INSERT INTO " + context.getString(R.string.like_table) + " values(" + id + ")";
+            sql = "INSERT INTO " +  context.getString(R.string.like_table) + " values(" + id + ")";
         } else {
             sql = "DELETE FROM " + context.getString(R.string.like_table) + " WHERE ID = " + id;
         }
         db.execSQL(sql);
+    }
+    public void insert(String table, String c, ContentValues values){
+        db.insert(table,c,values);
+    }
+    public void beginTransaction(){
+        db.beginTransaction();
+    }
+    public void setTransactionSuccessful(){
+        db.setTransactionSuccessful();
+    }
+    public void endTransaction(){
+        db.endTransaction();
     }
     public void close() {
         db.close();

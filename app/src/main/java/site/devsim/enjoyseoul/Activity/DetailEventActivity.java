@@ -97,14 +97,13 @@ public class DetailEventActivity extends AppCompatActivity {
     }
 
     private void initMenu(){
-        DBManager dbManager = new DBManager(this);
+        DBManager dbManager = DBManager.getInstance(this);
         if (dbManager.isLikeExist(eventItem.getId())) {
             int color = ContextCompat.getColor(this, R.color.isfavor);
             favorImg.setColorFilter(color);
         } else {
             favorImg.setColorFilter(Color.parseColor("#ffffff"));
         }
-        dbManager.close();
     }
 
     @OnClick(R.id.btn_link)
@@ -122,9 +121,8 @@ public class DetailEventActivity extends AppCompatActivity {
 
     @OnClick(R.id.btn_like)
     void likeClicked(){
-        DBManager dbManager = new DBManager(this);
+        DBManager dbManager = DBManager.getInstance(this);
         dbManager.addToggleLike(eventItem.getId());
-        dbManager.close();
         initMenu();
     }
 }

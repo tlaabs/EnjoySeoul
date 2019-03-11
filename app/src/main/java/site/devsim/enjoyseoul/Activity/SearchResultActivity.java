@@ -56,10 +56,9 @@ public class SearchResultActivity extends AppCompatActivity {
     }
 
     private void initListView(){
-        DBManager dbManager = new DBManager(this);
+        DBManager dbManager = DBManager.getInstance(this);
         String sql = SearchQueryBuilder.getSearchQuery(getResources().getString(R.string.event_table), condition);
         eventList = dbManager.runSql(sql);
-        dbManager.close();
     }
 
     private void initView(){

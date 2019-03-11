@@ -14,6 +14,7 @@ import com.bumptech.glide.Glide;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import site.devsim.enjoyseoul.DB.DBInitiator;
+import site.devsim.enjoyseoul.DB.DBManager;
 import site.devsim.enjoyseoul.DB.JobFinishListener;
 import site.devsim.enjoyseoul.R;
 
@@ -48,6 +49,8 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private void initDB(){
+        DBManager dbManager = DBManager.getInstance(this);
+        dbManager.clearEventTable();
         DBInitiator initiator = new DBInitiator(this, new JobFinishListener() {
             @Override
             public void doJob() {

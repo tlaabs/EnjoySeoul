@@ -6,7 +6,7 @@
     <!--DB-->
     <string name="db_name">enjoy.db</string>
     <string name="event_table">events</string>
-    <string name="like_table">like</string>
+    <string name="like_table">likes</string>
     <string name="data_src_url">http://115.84.165.224/bigfile/iot/sheet/csv/download.do?infId=OA-135</string>
     <string name="data_name">events_data.csv</string>
 
