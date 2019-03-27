@@ -8,6 +8,9 @@
 서울시 모바일 플랫폼 :  
 https://mplatform.seoul.go.kr/w/contest/award/2017/nominee/selectPageListNominee.do
 
+기획서 :  
+https://drive.google.com/file/d/1QNIcU-O0j6g2icA4Z2dT-wBGH8YQy0ug/view?usp=sharing
+
 # 주요 기능
 1. 다중 조건 검색  
 명칭, 장르, 요금 항목에 대하여 다중 조건 검색이 가능합니다.
