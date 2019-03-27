@@ -4,8 +4,8 @@
 
 [![Google Play](http://developer.android.com/images/brand/en_generic_rgb_wo_45.png)](https://play.google.com/store/apps/details?id=site.devsim.enjoyseoul)
 
-2017 서울시 앱 공모전 예선당선작으로 선정도었습니다!
-서울시 모바일 플랫폼 :
+2017 서울시 앱 공모전 예선당선작으로 선정되었습니다!  
+서울시 모바일 플랫폼 :  
 https://mplatform.seoul.go.kr/w/contest/award/2017/nominee/selectPageListNominee.do
 
 # 주요 기능
@@ -30,7 +30,7 @@ __[ 아래 기능은 본 앱 버전에는 포함되지 않았습니다. 서울�
 ```xml
 The MIT License (MIT)
 
-Copyright (c) 2019 tlaabs
+Copyright (c) 2018 tlaabs
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
